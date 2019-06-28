@@ -29,7 +29,10 @@
         :end-at="endAt"
         :first-day-of-week="firstDayOfWeek"
         :disabled-date="isDisabledDate"
+        :multipleValues="multipleValues"
+        :dateValues="dateValues"
         @select="selectDate"
+        @selectMultiple="selectMultipleDates"
       />
       <panel-year
         v-show="panel === 'YEAR'"
@@ -140,6 +143,16 @@ export default {
       type: [Object, Function],
       default () {
         return null
+      }
+    },
+    multipleValues: {
+      type: Boolean,
+      default: false
+    },
+    dateValues: {
+      type: Array,
+      default () {
+        return []
       }
     }
   },
@@ -359,6 +372,9 @@ export default {
         return
       }
       this.$emit('select-date', date)
+    },
+    selectMultipleDates (dates) {
+      this.$emit('select-multiple-dates', dates)
     },
     selectYear (year) {
       this.changeCalendarYear(year)

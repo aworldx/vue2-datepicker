@@ -28,6 +28,14 @@ export default {
       default: () => {
         return false
       }
+    },
+    multipleValues: {
+      type: Boolean,
+      default: false
+    },
+    dateValues: {
+      type: Array,
+      default: () => []
     }
   },
   methods: {
@@ -36,7 +44,13 @@ export default {
       if (this.disabledDate(date)) {
         return
       }
+
+      if (this.multipleValues) {
+        this.dateValues.push(date)
+      }
+
       this.$emit('select', date)
+      this.$emit('selectMultiple', this.dateValues)
     },
     getDays (firstDayOfWeek) {
       const days = this.t('days')
@@ -101,6 +115,11 @@ export default {
           classes.push('inrange')
         }
       }
+
+      if (this.multipleValues && this.dateValues.includes(cellTime)) {
+        classes.push('multiple')
+      }
+
       return classes
     },
     getCellTitle ({ year, month, day }) {

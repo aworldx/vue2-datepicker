@@ -72,8 +72,11 @@
         :date-format="innerDateFormat"
         :value="currentValue"
         :visible="popupVisible"
+        :multipleValues="multiple"
+        :dateValues="multipleDates"
         @select-date="selectDate"
-        @select-time="selectTime"></calendar-panel>
+        @select-time="selectTime"
+        @select-multiple-dates="selectMultipleDates"></calendar-panel>
       <div class="mx-range-wrapper"
         v-else>
         <calendar-panel
@@ -87,6 +90,7 @@
           :end-at="currentValue[1]"
           :start-at="null"
           :visible="popupVisible"
+          :multipleValues="multiple"
           @select-date="selectStartDate"
           @select-time="selectStartTime"></calendar-panel>
         <calendar-panel
@@ -98,6 +102,7 @@
           :start-at="currentValue[0]"
           :end-at="null"
           :visible="popupVisible"
+          :multipleValues="multiple"
           @select-date="selectEndDate"
           @select-time="selectEndTime"></calendar-panel>
       </div>
@@ -208,6 +213,10 @@ export default {
     },
     popupStyle: {
       type: Object
+    },
+    multiple: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -215,7 +224,8 @@ export default {
       currentValue: this.range ? [null, null] : null,
       userInput: null,
       popupVisible: false,
-      position: {}
+      position: {},
+      multipleDates: []
     }
   },
   watch: {
@@ -405,6 +415,11 @@ export default {
     clearDate () {
       const date = this.range ? [null, null] : null
       this.currentValue = date
+
+      if (this.multiple) {
+        this.multipleDates = []
+      }
+
       this.updateDate(true)
       this.$emit('clear')
     },
@@ -428,11 +443,23 @@ export default {
       this.emitDate('change')
       return true
     },
+    updateMultipleDates (confirm = false) {
+      if ((this.confirm && !confirm) || this.disabled) {
+        return false
+      }
+
+      this.emitMultipleDates('inputMultiple')
+
+      return true
+    },
     emitDate (eventName) {
+      this.$emit(eventName, this.multipleDates)
+    },
+    emitMultipleDates (eventName) {
       const { date2value } = this.transform
       const value = this.range
-        ? this.currentValue.map(date2value)
-        : date2value(this.currentValue)
+              ? this.currentValue.map(date2value)
+              : date2value(this.currentValue)
       this.$emit(eventName, value)
     },
     handleValueChange (value) {
@@ -446,6 +473,10 @@ export default {
     selectDate (date) {
       this.currentValue = date
       this.updateDate() && this.closePopup()
+    },
+    selectMultipleDates (dates) {
+      this.multipleDates = dates
+      this.updateMultipleDates() && this.closePopup()
     },
     selectStartDate (date) {
       this.$set(this.currentValue, 0, date)
