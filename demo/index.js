@@ -107,6 +107,7 @@ new Vue({
           v-model="value6"
           format="YYYY-MM-DD"
           lang="en"
+          :multiple="true"
           confirm></date-picker>`,
       'datetime with confirm': `
         <date-picker
