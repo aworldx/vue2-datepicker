@@ -217,6 +217,10 @@ export default {
     multiple: {
       type: Boolean,
       default: false
+    },
+    multipleDates: {
+      type: Array,
+      default: () => []
     }
   },
   data () {
@@ -224,8 +228,7 @@ export default {
       currentValue: this.range ? [null, null] : null,
       userInput: null,
       popupVisible: false,
-      position: {},
-      multipleDates: []
+      position: {}
     }
   },
   watch: {

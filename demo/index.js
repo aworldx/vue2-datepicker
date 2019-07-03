@@ -108,6 +108,7 @@ new Vue({
           format="YYYY-MM-DD"
           lang="en"
           :multiple="true"
+          :multipleDates="[new Date(2019,06,03), new Date(2019,06,04), new Date(2019,06,07)]"
           confirm></date-picker>`,
       'datetime with confirm': `
         <date-picker
