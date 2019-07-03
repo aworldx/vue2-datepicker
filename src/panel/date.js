@@ -38,6 +38,11 @@ export default {
       default: () => []
     }
   },
+  data () {
+    return {
+      dates: this.dateValues
+    }
+  },
   methods: {
     selectDate ({ year, month, day }) {
       const date = new Date(year, month, day)
@@ -46,16 +51,16 @@ export default {
       }
 
       if (this.multipleValues) {
-        const exists = this.dateValues.map((item) => item.getTime()).includes(date.getTime())
+        const exists = this.dates.map((item) => item.getTime()).includes(date.getTime())
         if (!exists) {
-          this.dateValues.push(date)
+          this.dates.push(date)
         } else {
-          this.dateValues = this.dateValues.filter((item) => item.getTime() !== date.getTime())
+          this.dates = this.dates.filter((item) => item.getTime() !== date.getTime())
         }
       }
 
       this.$emit('select', date)
-      this.$emit('selectMultiple', this.dateValues)
+      this.$emit('selectMultiple', this.dates)
     },
     getDays (firstDayOfWeek) {
       const days = this.t('days')
@@ -121,7 +126,7 @@ export default {
         }
       }
 
-      if (this.multipleValues && this.dateValues.map((item) => item.getTime()).includes(cellTime)) {
+      if (this.multipleValues && this.dates.map((item) => item.getTime()).includes(cellTime)) {
         classes.push('multiple')
       }
 

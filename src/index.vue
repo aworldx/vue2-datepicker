@@ -228,7 +228,8 @@ export default {
       currentValue: this.range ? [null, null] : null,
       userInput: null,
       popupVisible: false,
-      position: {}
+      position: {},
+      dates: this.multipleDates
     }
   },
   watch: {
@@ -420,7 +421,7 @@ export default {
       this.currentValue = date
 
       if (this.multiple) {
-        this.multipleDates = []
+        this.dates = []
       }
 
       this.updateDate(true)
@@ -431,6 +432,11 @@ export default {
       if (valid) {
         this.updateDate(true)
       }
+
+      if (this.dates.length > 0) {
+        this.updateMultipleDates(true)
+      }
+
       this.emitDate('confirm')
       this.closePopup()
     },
@@ -456,14 +462,12 @@ export default {
       return true
     },
     emitDate (eventName) {
-      this.$emit(eventName, this.multipleDates)
+      const { date2value } = this.transform
+      const value = this.range ? this.currentValue.map(date2value) : date2value(this.currentValue)
+      this.$emit(eventName, value)
     },
     emitMultipleDates (eventName) {
-      const { date2value } = this.transform
-      const value = this.range
-              ? this.currentValue.map(date2value)
-              : date2value(this.currentValue)
-      this.$emit(eventName, value)
+      this.$emit(eventName, this.dates)
     },
     handleValueChange (value) {
       const { value2date } = this.transform
@@ -478,7 +482,7 @@ export default {
       this.updateDate() && this.closePopup()
     },
     selectMultipleDates (dates) {
-      this.multipleDates = dates
+      this.dates = dates
       this.updateMultipleDates() && this.closePopup()
     },
     selectStartDate (date) {
