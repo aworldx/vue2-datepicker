@@ -25,6 +25,7 @@ $primary-color: #1284e7;
   margin-top: 1px;
   margin-bottom: 1px;
   border: 1px solid #d9d9d9;
+  border-radius: 11px;
   background-color: #fff;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   z-index: 1000;
@@ -190,12 +191,58 @@ $primary-color: #1284e7;
   line-height: 34px;
   text-align: center;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+
   > a {
-    color: inherit;
     text-decoration: none;
     cursor: pointer;
+    box-shadow: 0 1px 3px 0 rgba(26, 44, 78, 0.26);
+    background-color: #fff;
+    width: 23px;
+    height: 22px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.18px;
+    color: #333333;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+
     &:hover {
       color: mix(#fff, $primary-color, 20%);
+    }
+
+    &.mx-icon-last-month {
+      margin-right: auto;
+    }
+
+    &.mx-icon-last-year {
+      margin-right: 5px;
+    }
+
+    &.mx-icon-next-month {
+      margin-left: auto;
+    }
+
+    &.mx-icon-next-year {
+      margin-left: 5px;
+    }
+
+    &.mx-current-month {
+      margin-right: 5px;
+    }
+
+    &.mx-current-month, &.mx-current-year, &.mx-time-header {
+      background-color: transparent;
+      box-shadow: none;
     }
   }
   @at-root {
@@ -259,9 +306,18 @@ $primary-color: #1284e7;
   table-layout: fixed;
   border-collapse: collapse;
   border-spacing: 0;
+  th {
+    font-family: Helvetica;
+    font-size: 11px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.18;
+    letter-spacing: 1.43px;
+    color: #979797;
+  }
   td,
   th {
-    font-size: 12px;
     width: 32px;
     height: 32px;
     padding: 0;
@@ -269,6 +325,13 @@ $primary-color: #1284e7;
     text-align: center;
   }
   td {
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.44;
+    letter-spacing: normal;
+    color: #1e1e1e;
     &.today {
       color: mix(#fff, $primary-color, 10%);
     }

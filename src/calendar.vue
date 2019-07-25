@@ -1,10 +1,8 @@
 <template>
   <div class="mx-calendar" :class="'mx-calendar-panel-' + panel.toLowerCase()">
     <div class="mx-calendar-header">
-      <a v-show="panel !== 'TIME'" class="mx-icon-last-year" @click="handleIconYear(-1)">&#171;</a>
-      <a v-show="panel === 'DATE'" class="mx-icon-last-month" @click="handleIconMonth(-1)">&#8249;</a>
-      <a v-show="panel !== 'TIME'" class="mx-icon-next-year" @click="handleIconYear(1)">&#187;</a>
-      <a v-show="panel === 'DATE'" class="mx-icon-next-month" @click="handleIconMonth(1)">&#8250;</a>
+      <a v-show="panel !== 'TIME'" class="mx-icon-last-year" @click="handleIconYear(-1)"><<</a>
+      <a v-show="panel === 'DATE'" class="mx-icon-last-month" @click="handleIconMonth(-1)"><</a>
       <a
         v-show="panel === 'DATE'"
         class="mx-current-month"
@@ -17,6 +15,8 @@
       >{{calendarYear}}</a>
       <a v-show="panel === 'YEAR'" class="mx-current-year">{{yearHeader}}</a>
       <a v-show="panel === 'TIME'" class="mx-time-header" @click="handleTimeHeader">{{timeHeader}}</a>
+      <a v-show="panel === 'DATE'" class="mx-icon-next-month" @click="handleIconMonth(1)">></a>
+      <a v-show="panel !== 'TIME'" class="mx-icon-next-year" @click="handleIconYear(1)">>></a>
     </div>
     <div class="mx-calendar-content">
       <panel-date
