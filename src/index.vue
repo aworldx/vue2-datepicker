@@ -221,6 +221,9 @@ export default {
     multipleDates: {
       type: Array,
       default: () => []
+    },
+    humanizedTimeFormat: {
+      type: String
     }
   },
   data () {

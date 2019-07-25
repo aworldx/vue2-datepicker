@@ -187,6 +187,10 @@ export default {
     },
     timeHeader () {
       if (this.type === 'time') {
+        if (this.$parent.humanizedTimeFormat) {
+          return this.$parent.humanizedTimeFormat
+        }
+
         return this.$parent.format
       }
       return this.value && formatDate(this.value, this.dateFormat)

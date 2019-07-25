@@ -237,7 +237,7 @@ $primary-color: #1284e7;
     }
 
     &.mx-current-month {
-      margin-right: 5px;
+      margin-right: 10px;
     }
 
     &.mx-current-month, &.mx-current-year, &.mx-time-header {
@@ -276,10 +276,12 @@ $primary-color: #1284e7;
     cursor: pointer;
     &:hover {
       background-color: #eaf8fe;
+      border-radius: 7px;
     }
     &.actived {
       color: #fff;
-      background-color: $primary-color;
+      background-color: #3ACBFD;
+      border-radius: 7px;
     }
     &.inrange {
       background-color: #eaf8fe;
