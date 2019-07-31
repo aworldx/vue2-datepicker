@@ -136,6 +136,11 @@ export default {
       return formatDate(new Date(year, month, day), this.dateFormat)
     }
   },
+  watch: {
+    dateValues (data) {
+      this.dates = data
+    }
+  },
   render (h) {
     const ths = this.getDays(this.firstDayOfWeek).map(day => {
       return <th>{day}</th>

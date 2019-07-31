@@ -14,7 +14,8 @@ export default {
     'pickers': ['next 7 days', 'next 30 days', 'previous 7 days', 'previous 30 days'],
     'placeholder': {
       'date': 'Select Date',
-      'dateRange': 'Select Date Range'
+      'dateRange': 'Select Date Range',
+      'emptyMultipleDates': 'Dates are not selected'
     }
   },
   'ro': {
@@ -59,7 +60,8 @@ export default {
     'pickers': ['след. 7 дней', 'след. 30 дней', 'прош. 7 дней', 'прош. 30 дней'],
     'placeholder': {
       'date': 'Выберите дату',
-      'dateRange': 'Выберите период'
+      'dateRange': 'Выберите период',
+      'emptyMultipleDates': 'Даты не выбраны'
     }
   },
   'de': {

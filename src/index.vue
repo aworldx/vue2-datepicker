@@ -73,7 +73,7 @@
         :value="currentValue"
         :visible="popupVisible"
         :multipleValues="multiple"
-        :dateValues="multipleDates"
+        :dateValues="dates"
         @select-date="selectDate"
         @select-time="selectTime"
         @select-multiple-dates="selectMultipleDates"></calendar-panel>
@@ -273,6 +273,11 @@ export default {
       if (typeof this.placeholder === 'string') {
         return this.placeholder
       }
+
+      if (this.multiple) {
+        return this.t('placeholder.emptyMultipleDates')
+      }
+
       return this.range ? this.t('placeholder.dateRange') : this.t('placeholder.date')
     },
     text () {
@@ -425,9 +430,11 @@ export default {
 
       if (this.multiple) {
         this.dates = []
+        this.updateMultipleDates(true)
+      } else {
+        this.updateDate(true)
       }
 
-      this.updateDate(true)
       this.$emit('clear')
     },
     confirmDate () {

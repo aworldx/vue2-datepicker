@@ -44,6 +44,9 @@ new Vue({
           </pre>
         )
       })
+    },
+    inputMultiple () {
+      console.log('inputMultiple')
     }
   },
   render (h) {
