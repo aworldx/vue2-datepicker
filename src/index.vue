@@ -518,7 +518,7 @@ export default {
     },
     selectMultipleDates (dates) {
       this.dates = dates
-      this.updateMultipleDates() && this.closePopup()
+      this.updateMultipleDates()
     },
     selectStartDate (date) {
       this.$set(this.currentValue, 0, date)
