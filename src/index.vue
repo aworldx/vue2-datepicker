@@ -472,10 +472,6 @@ export default {
         this.updateDate(true)
       }
 
-      if (this.dates.length > 0) {
-        this.updateMultipleDates(true)
-      }
-
       this.emitDate('confirm')
       this.closePopup()
     },
@@ -492,7 +488,7 @@ export default {
       return true
     },
     updateMultipleDates (confirm = false) {
-      if ((this.confirm && !confirm) || this.disabled) {
+      if (this.disabled) {
         return false
       }
 
