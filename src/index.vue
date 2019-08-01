@@ -224,6 +224,13 @@ export default {
     },
     humanizedTimeFormat: {
       type: String
+    },
+    notSelectedMultipleDatesText: {
+      type: String,
+      default: 'Dates are not selected'
+    },
+    multipleDatesTextFormatter: {
+      type: Function
     }
   },
   data () {
@@ -232,7 +239,7 @@ export default {
       userInput: null,
       popupVisible: false,
       position: {},
-      dates: this.multipleDates
+      dates: [...this.multipleDates]
     }
   },
   watch: {
@@ -281,6 +288,10 @@ export default {
       return this.range ? this.t('placeholder.dateRange') : this.t('placeholder.date')
     },
     text () {
+      if (this.multiple) {
+        return this.textForMultiple
+      }
+
       if (this.userInput !== null) {
         return this.userInput
       }
@@ -293,6 +304,24 @@ export default {
       return this.isValidRangeValue(this.value)
         ? `${this.stringify(value2date(this.value[0]))} ${this.rangeSeparator} ${this.stringify(value2date(this.value[1]))}`
         : ''
+    },
+    textForMultiple () {
+      if (this.multipleDatesTextFormatter) {
+        return this.multipleDatesTextFormatter(this.dates)
+      }
+
+      if (!this.dates || !this.dates.length) {
+        return this.notSelectedMultipleDatesText
+      }
+
+      let text = []
+      text.push(this.stringify(this.dates[0]))
+
+      if (this.dates.length > 1) {
+        text.push('+ ' + (this.dates.length - 1))
+      }
+
+      return text.join(' ')
     },
     computedWidth () {
       if (typeof this.width === 'number' || (typeof this.width === 'string' && /^\d+$/.test(this.width))) {
